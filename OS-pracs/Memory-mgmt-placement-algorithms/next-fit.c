@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-void firstFit(int blockSize[], int m, int processSize[], int n, int holeSize[])
+void nextFit(int blockSize[], int m, int processSize[], int n, int holeSize[])
 {
     int i, j;
     int allocation[n];
@@ -84,5 +84,5 @@ void main()
         scanf("%d", &processSize[i]);
     }
 
-    firstFit(blockSize, m, processSize, n, holeSize);
+    nextFit(blockSize, m, processSize, n, holeSize);
 }
