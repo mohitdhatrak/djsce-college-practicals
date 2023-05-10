@@ -57,7 +57,7 @@ void CSCAN(int requestArr[], int sortArr[], int head, int size, int direction)
         seekSequence[index] = NUM_OF_TRACKS;
         index++;
         // remaining half sequence
-        for (int i = size + 1; i > headPosition; i--)
+        for (int i = size; i > headPosition; i--)
         {
             seekSequence[index] = sortArr[i];
             index++;
