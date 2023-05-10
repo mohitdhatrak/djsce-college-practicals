@@ -118,7 +118,7 @@ void main()
 
     printf("\n1. Enter 1 for left (R -> L)"
            "\n2. Enter 2 for right (L -> R)");
-    printf("\nChoose a direction: "); // LEFT
+    printf("\nChoose a direction: "); // RIGHT
     scanf("%d", &direction);
 
     switch (direction)
