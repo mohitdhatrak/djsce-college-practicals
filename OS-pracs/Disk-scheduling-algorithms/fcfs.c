@@ -29,7 +29,7 @@ void FCFS(int requestArr[], int head, int size)
     }
 }
 
-int main()
+void main()
 {
     int size, head;
 
@@ -46,4 +46,8 @@ int main()
     }
 
     FCFS(requestArr, head, size);
+
+    // answer
+    // Total number of seek operations = 510
+    // Seek Sequence is 176 79 34 60 92 11 41 114
 }

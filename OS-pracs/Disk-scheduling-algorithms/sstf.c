@@ -51,7 +51,7 @@ void SSTF(int requestArr[], int copyArr[], int head, int size)
     }
 }
 
-int main()
+void main()
 {
     int size, head;
 
@@ -70,4 +70,8 @@ int main()
     }
 
     SSTF(requestArr, copyArr, head, size);
+
+    // answer
+    // Total number of seek operations = 204
+    // Seek Sequence is 50 41 34 11 60 79 92 114 176
 }

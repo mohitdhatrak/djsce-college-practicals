@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-int main()
+void main()
 {
     // P0, P1, P2, P3, P4 are the Process names here
     int n, m, i, j, k;
@@ -114,4 +114,7 @@ int main()
         }
         printf("P%d", safe[n - 1]);
     }
+
+    // answer
+    // P1->P3->P4->P0->P2
 }

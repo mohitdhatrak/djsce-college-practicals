@@ -58,7 +58,7 @@ void consumer()
     mutex = signal(mutex);
 }
 
-int main()
+void main()
 {
     int n, i, flag = 0;
     printf("\n1. Enter 1 for Producer"
