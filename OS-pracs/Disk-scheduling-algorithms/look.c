@@ -35,7 +35,7 @@ int findPosition(int sortArr[], int head, int size)
     }
 }
 
-void SCAN(int requestArr[], int sortArr[], int head, int size, int direction)
+void LOOK(int requestArr[], int sortArr[], int head, int size, int direction)
 {
     int totalSeek = 0;
     int seekSequence[size];
@@ -116,11 +116,11 @@ void main()
     switch (direction)
     {
     case 1:
-        SCAN(requestArr, sortArr, head, size, LEFT);
+        LOOK(requestArr, sortArr, head, size, LEFT);
         break;
 
     case 2:
-        SCAN(requestArr, sortArr, head, size, RIGHT);
+        LOOK(requestArr, sortArr, head, size, RIGHT);
         break;
 
     default:
