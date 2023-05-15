@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include <time.h>
 
+// best case time complexity : O(n)
+// worse case time complexity : O(n^2)
+// average case time complexity : O(n^2)
 double insertionSort(int[], int);
 
 void main()
