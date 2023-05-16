@@ -39,7 +39,7 @@ void main()
 
     for (i = 0; i < size; i++)
     {
-        arr[i] = (rand() % 1000);
+        arr[i] = (rand() % size);
     }
     timeTaken = selectionSort(arr, size);
     printf("Average case time: %0.4lf seconds\n", timeTaken);
