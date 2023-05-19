@@ -9,3 +9,5 @@
 ![image](https://github.com/mohitdhatrak/Sem4-OS-AOA-pracs/assets/91209576/48bb0232-5b20-40f9-933c-5d678f15a95d)
 
 ## Byte Stuffing
+
+![image](https://github.com/mohitdhatrak/Sem4-OS-AOA-pracs/assets/91209576/94567416-bee6-4e8d-a796-b5798bc5e164)
