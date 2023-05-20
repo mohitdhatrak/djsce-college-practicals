@@ -1,1 +1,1 @@
-# Sem4-OS-AOA-pracs
+# djsce-college-pracs
