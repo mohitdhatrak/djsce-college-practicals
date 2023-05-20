@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <limits.h>
+
 #define N 10
 #define INF INT_MAX
 
@@ -52,7 +53,7 @@ void main()
     scanf("%d", &n);
     printf("Enter source node: ");
     scanf("%d", &source);
-    printf("Enter adjacency graph: \n");
+    printf("Enter adjacency matrix of graph: \n");
     for (i = 1; i <= n; i++)
     {
         for (j = 1; j <= n; j++)
