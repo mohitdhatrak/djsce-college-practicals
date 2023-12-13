@@ -11,7 +11,7 @@ def dfs(graph, source, path=[]):
 
         for neighbour in graph[source]:
             path = dfs(graph, neighbour, path)
-            # to stop at goal node
+            # to stop at goal state
             # if "GOAL" in path:
             #     break
 
