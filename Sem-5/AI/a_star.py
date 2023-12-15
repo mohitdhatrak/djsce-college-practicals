@@ -37,7 +37,7 @@ def costFormula(path, node):  # path <- path of previous node , node <- current 
     return g + h
 
 
-open_list = []  # has a list for each node - [node, node heuristic value, node path]
+open_list = []  # has a list for each node - [node, node path cost, node path]
 close_list = []  # has all nodes that have been visited
 
 # add start node to open list
@@ -58,8 +58,9 @@ try:
         # once we select a parent node, we explore all its options and add to open list
         for j in graph[parent_node]:
             open_list.append([j, costFormula(current_path, j), current_path + [j]])
-            # sort the open list to solve for smaller f(n) values first
-            open_list = sorted(open_list, key=lambda x: x[1])
+
+        # sort the open list to solve for smaller f(n) values first
+        open_list = sorted(open_list, key=lambda x: x[1])
 
         # remove the current parent node from open list, only if it is 1st after sorting
         #  i.e. if it has the lowest f(n) value
