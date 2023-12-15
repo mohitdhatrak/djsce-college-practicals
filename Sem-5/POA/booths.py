@@ -45,13 +45,13 @@ a = a.zfill(maxlen)
 rightshift = ""
 
 while count > 0:
-    if q1 == "1" and q[maxlen - 1] == "0":
+    if q[maxlen - 1] == "0" and q1 == "1":
         a = bin(int(a, 2) + int(m, 2)).replace("0b", "")
         if len(a) > maxlen:
-            a = a[1:]
+            a = a[1:]  # drop carry
         a = a.zfill(maxlen)
 
-    elif q1 == "0" and q[maxlen - 1] == "1":
+    elif q[maxlen - 1] == "1" and q1 == "0":
         a = bin(int(a, 2) + int(minusm, 2)).replace("0b", "")
         if len(a) > maxlen:
             a = a[1:]
@@ -67,12 +67,17 @@ while count > 0:
     q1 = rightshift[-1]
     count -= 1
 
-ans = a + q
+ans = a + q  # append a, q
+ansLen = len(ans)
 minus = False
+
 if ans[0] == "1":
     ans = twosComplement(ans)
+    ans = ans.zfill(ansLen)
     minus = True
+
 print(ans)
+
 if minus:
     print(int(ans, 2) * -1)
 else:
