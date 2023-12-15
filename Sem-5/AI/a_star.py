@@ -45,26 +45,26 @@ open_list.append([start_node, heuristic[start_node], [start_node]])
 
 try:
     while True:
-        # parent_node = start_node
+        # since we sort the list, we keep getting newer nodes to explore
         parent_node = open_list[0][0]
-        close_list.append(parent_node)  # once we visit we add it to close list
-
-        # current_path = [start_node]
         current_path = open_list[0][2]
 
-        if parent_node == goal_node:
+        close_list.append(parent_node)  # once we visit we add it to close list
+
+        if parent_node == goal_node:  # breaking condition
             break
 
         print(f"\nCurrently at node: {parent_node}")
-        for j in graph[open_list[0][0]]:
+        # once we select a parent node, we explore all its options and add to open list
+        for j in graph[parent_node]:
             open_list.append([j, costFormula(current_path, j), current_path + [j]])
             # sort the open list to solve for smaller f(n) values first
             open_list = sorted(open_list, key=lambda x: x[1])
 
-        # remove the current parent node from open list
-        for i in open_list:
-            if i[0] == parent_node:
-                open_list.remove(i)
+        # remove the current parent node from open list, only if it is 1st after sorting
+        #  i.e. if it has the lowest f(n) value
+        if open_list[0][0] == parent_node:
+            open_list.remove(open_list[0])  # removes the first list from open list
 
         print(f"Open List: {open_list}")
         print(f"Closed List: {close_list}")
