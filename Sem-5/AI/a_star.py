@@ -9,8 +9,7 @@ graph = {
 
 # Define the heuristic values for A* search - h(n) for each node
 heuristic = {"A": 21, "B": 14, "C": 18, "D": 18, "E": 5, "F": 8, "Z": 0}
-start_node = input("Enter Start Node: ")  # this is also start node at the beginning
-curr_node = start_node
+start_node = input("Enter Start Node: ")
 goal_node = input("Enter Goal Node: ")
 
 
