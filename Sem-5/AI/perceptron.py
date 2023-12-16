@@ -4,9 +4,10 @@ import numpy as np
 X1 = np.array([1, -2, 0, -1])
 X2 = np.array([0, 1.5, -0.5, -1])
 X3 = np.array([-1, 1, 0.5, -1])
+
 X = [X1, X2, X3]
 
-# Initialize weight vector W and bias term b
+# Initialize weight vector W
 W = np.array([1, -1, 0, 0.5])
 
 # Define target outputs (desired classes) for the training examples
@@ -25,14 +26,16 @@ for i in range(epochs):
         net = np.dot(X[j], W)
 
         # as per sign or step activation function
-        if net <= -1:
+        if net < 0:
             output = -1
         elif net == 0:
             output = 0
-        elif net >= 1:
+        elif net > 0:
             output = 1
 
-        # as per perceptron formula
+        # as per perceptron formula ->
+        # dW = c (d - o) * xi
+        # W new = W old + dW
         error = d[j] - output
         dW = c * error * X[j]
         W += dW
