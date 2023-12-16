@@ -1,17 +1,33 @@
 import numpy as np
 
-# Define input vectors X1, X2, X3
-X1 = np.array([1, -2, 0, -1])
-X2 = np.array([0, 1.5, -0.5, -1])
-X3 = np.array([-1, 1, 0.5, -1])
+# This is a 5x4 matrix which resembles an L
+# 10000
+# 10000
+# 10000
+# 11111
 
-X = [X1, X2, X3]
+# This is a 5x4 matrix which represents an M
+# 10001
+# 11011
+# 10101
+# 10001
+
+input_size = 5
+
+# Define input vectors L and M
+# L = np.array([1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1])  # L
+# M = np.array([1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 0, 1])  # M
+L = np.array([1, 0, 0, 0, 0])  # L
+M = np.array([1, 0, 0, 0, 1])  # M
+
+X = [L, M]
 
 # Initialize weight vector W
-W = np.array([1, -1, 0, 0.5])
+# W = np.array([0.5, -0.2, 0.8, -0.3, 0.2, 0.6, -0.4, 0.1, 0.7, -0.5, 0.3, -0.6, 0.4, -0.7, 0.9, -0.1, -0.8, 0.2, 0.5, -0.9])
+W = np.random.rand(input_size)
 
 # Define target outputs (desired classes) for the training examples
-d = [-1, -1, 1]
+d = [-1, 1]  # L -> -1, M -> 1
 
 # Set learning rate (step size)
 c = 0.1
