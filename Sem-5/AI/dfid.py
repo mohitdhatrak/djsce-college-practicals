@@ -3,29 +3,37 @@ from collections import defaultdict
 
 class Graph:
     def __init__(self, vertices):
-        self.V = vertices  # Number of vertices
+        self.vertices = vertices  # Number of vertices
         self.graph = defaultdict(list)
 
     def addEdge(self, u, v):
         self.graph[u].append(v)
 
-    def DLS(self, src, target, maxDepth):
+    def findTarget(self, src, target, max_depth):
+        print(src, end=" ")
+
         if src == target:
             return True
-        if maxDepth <= 0:
+        if max_depth <= 0:
             return False
 
         for i in self.graph[src]:
-            # performs dfs till the maxDepth is reached for current DLS call
-            if self.DLS(i, target, maxDepth - 1):
+            # performs dfs till the max_depth is reached for current findTarget call
+            if self.findTarget(i, target, max_depth - 1):
                 return True
         return False
 
-    def IDDFS(self, src, target, maxDepth):
-        for i in range(maxDepth + 1):
-            # calls DLS, for every depth level it starts from root node again
-            if self.DLS(src, target, i):
+    def dfid(self, src, target, max_depth):
+        print(f"Input graph: {dict(self.graph)}")
+
+        for i in range(max_depth + 1):
+            print(f"\nDepth level {i}: ")
+            print("Nodes visited:", end=" ")
+            # calls findTarget, for every depth level it starts from root node again
+            if self.findTarget(src, target, i):
                 return True
+            print()  # to add new line
+
         return False
 
 
@@ -44,14 +52,21 @@ g.addEdge(1, 4)
 g.addEdge(2, 5)
 g.addEdge(2, 6)
 
-target = 5
-# maxDepth = 1
-maxDepth = 2
 src = 0
+target = 5
 
-if g.IDDFS(src, target, maxDepth):
-    print(f"Target {target} is reachable from source within max depth of {maxDepth}")
+# max_depth = 1
+max_depth = 2
+
+print(f"Source node: {src}")
+print(f"Target node: {target}")
+print(f"Max depth: {max_depth}")
+
+if g.dfid(src, target, max_depth):
+    print(
+        f"\n\nTarget {target} is reachable from source within max depth of {max_depth}"
+    )
 else:
     print(
-        f"Target {target} is NOT reachable from source within max depth of {maxDepth}"
+        f"\n\nTarget {target} is NOT reachable from source within max depth of {max_depth}"
     )
