@@ -1,0 +1,11 @@
+{
+  "name": "John Doe",
+  "age": 25,
+  "city": "Exampleville",
+  "is_student": false,
+  "grades": [
+    85,
+    90,
+    78
+  ]
+}

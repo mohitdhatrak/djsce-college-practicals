@@ -17,3 +17,5 @@ for i in range(10000):
     fileWrite.write(
         f"INSERT INTO user_data (id, fname, lname, gender, email) VALUES ({id}, '{fname}', '{lname}', '{gender}', '{email}');\n"
     )
+
+fileWrite.close()
