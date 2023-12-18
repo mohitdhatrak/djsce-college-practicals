@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 5px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <button type="button" onClick="loadXMLData()">Load Data</button>
+    <table id="demo"></table>
+    <script>
+        function loadXMLData() {
+            var xmlContent = `<?xml version="1.0" ?>
+                <breakfast_menu>
+                <food>
+                    <name>Belgian Waffles</name>
+                    <price>$5.95</price>
+                    <description>
+                Two of our famous Belgian Waffles with plenty of real maple syrup
+                </description>
+                    <calories>650</calories>
+                </food>
+                <food>
+                    <name>Strawberry Belgian Waffles</name>
+                    <price>$7.95</price>
+                    <description>
+                    Light Belgian waffles covered with strawberries and whipped creama
+                    </description>
+                    <calories>900</calories>
+                </food>
+                <food>
+                    <name>Berry-Berry Belgian Waffles</name>
+                    <price>$8.95</price>
+                    <description>
+                    Belgian waffles covered with assorted fresh berries and whipped cream
+                    </description>
+                    <calories>900</calories>
+                </food>
+                <food>
+                    <name>French Toast</name>
+                    <price>$4.50</price>
+                    <description>
+                    Thick slices made from our homemade sourdough bread
+                    </description>
+                    <calories>600</calories>
+                </food>
+                <food>
+                    <name>Homestyle Breakfast</name>
+                    <price>$6.95</price>
+                    <description>
+                    Two eggs, bacon or sausage, toast, and our ever-popular hash browns
+                    </description>
+                    <calories>950</calories>
+                </food>
+                </breakfast_menu>
+            `;
+            console.log("INSIDE loadXMLData")
+            var parser = new DOMParser();
+            var xmlDoc = parser.parseFromString(xmlContent, "application/xml");
+            myFunction(xmlDoc);
+            console.log(xmlDoc)
+        }
+
+        function myFunction(xml) {
+            console.log("INSIDE myFunction")
+            var i;
+            var table = "<tr><th>Name</th><th>price</th><th>description</th><th>Calories</th></tr>";
+
+            var x = xml.getElementsByTagName("food");
+            console.log(x)
+            for (i = 0; i < x.length; i++) {
+                // console.log(x[i].getElementsByTagName("name"));
+                table += "<tr><td>" +
+                    x[i].getElementsByTagName("name")[0].textContent +
+                    "</td><td>" +
+                    x[i].getElementsByTagName("price")[0].textContent +
+                    "</td><td>" +
+                    x[i].getElementsByTagName("description")[0].textContent +
+                    "</td><td>" +
+                    x[i].getElementsByTagName("calories")[0].textContent +
+                    "</td></tr>"
+
+            }
+            document.getElementById("demo").innerHTML = table;
+        }
+    </script>
+</body>
+
+</html>
