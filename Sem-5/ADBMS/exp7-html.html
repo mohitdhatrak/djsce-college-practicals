@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>XML Catalog</title>
+</head>
+
+<body>
+    <h1>Book Catalog</h1>
+
+    <input type="text" id="titleInput" placeholder="Search by Title">
+    <input type="text" id="authorInput" placeholder="Search by Author">
+    <input type="text" id="genreInput" placeholder="Search by Genre">
+    <input type="number" id="priceInput" placeholder="Search by Price">
+    <input type="date" id="dateInput" placeholder="Search by Publish Date">
+    <button onclick="searchBooks()">Search</button>
+
+    <ul id="bookList"></ul>
+
+    <script>
+        var catalogData; // Store the XML data for searching
+
+        // Function to load and parse the XML file
+        function loadXML() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState === 4 && this.status === 200) {
+                    catalogData = this.responseXML; // Store the XML data for searching
+                    displayCatalog(catalogData);
+                }
+            };
+            xhttp.open("GET", "exp7-book.xml", true);
+            xhttp.send();
+        }
+
+        // Function to display the catalog data
+        function displayCatalog(xml) {
+            var books = xml.getElementsByTagName("book");
+            var list = document.getElementById("bookList");
+
+            for (var i = 0; i < books.length; i++) {
+                var book = books[i];
+                var author = book.getElementsByTagName("author")[0].textContent;
+                var title = book.getElementsByTagName("title")[0].textContent;
+                var genre = book.getElementsByTagName("genre")[0].textContent;
+                var price = parseFloat(book.getElementsByTagName("price")[0].textContent);
+                var publishDate = new Date(book.getElementsByTagName("publish_date")[0].textContent);
+                var description = book.getElementsByTagName("description")[0].textContent;
+
+                var listItem = document.createElement("li");
+                listItem.innerHTML = "<strong>Title:</strong> " + title + "<br>" +
+                    "<strong>Author:</strong> " + author + "<br>" +
+                    "<strong>Genre:</strong> " + genre + "<br>" +
+                    "<strong>Price:</strong> $" + price.toFixed(2) + "<br>" +
+                    "<strong>Publish Date:</strong> " + publishDate.toDateString() + "<br>" +
+                    "<strong>Description:</strong> " + description + "<br>";
+
+                list.appendChild(listItem);
+            }
+        }
+
+        // Function to search books based on user input
+        function searchBooks() {
+            var title = document.getElementById("titleInput").value.toLowerCase();
+            var author = document.getElementById("authorInput").value.toLowerCase();
+            var genre = document.getElementById("genreInput").value.toLowerCase();
+            var price = parseFloat(document.getElementById("priceInput").value);
+            var date = new Date(document.getElementById("dateInput").value);
+
+            var list = document.getElementById("bookList");
+            list.innerHTML = ""; // Clear the previous list
+
+            var books = catalogData.getElementsByTagName("book");
+
+            for (var i = 0; i < books.length; i++) {
+                var book = books[i];
+                var bookTitle = book.getElementsByTagName("title")[0].textContent.toLowerCase();
+                var bookAuthor = book.getElementsByTagName("author")[0].textContent.toLowerCase();
+                var bookGenre = book.getElementsByTagName("genre")[0].textContent.toLowerCase();
+                var bookPrice = parseFloat(book.getElementsByTagName("price")[0].textContent);
+                var bookDate = new Date(book.getElementsByTagName("publish_date")[0].textContent);
+
+                if (
+                    (title === "" || bookTitle.includes(title)) &&
+                    (author === "" || bookAuthor.includes(author)) &&
+                    (genre === "" || bookGenre.includes(genre)) &&
+                    (isNaN(price) || price === bookPrice) &&
+                    (isNaN(date) || date.toDateString() === bookDate.toDateString())
+                ) {
+                    var description = book.getElementsByTagName("description")[0].textContent;
+
+                    var listItem = document.createElement("li");
+                    listItem.innerHTML = "<strong>Title:</strong> " + bookTitle + "<br>" +
+                        "<strong>Author:</strong> " + bookAuthor + "<br>" +
+                        "<strong>Genre:</strong> " + bookGenre + "<br>" +
+                        "<strong>Price:</strong> $" + bookPrice.toFixed(2) + "<br>" +
+                        "<strong>Publish Date:</strong> " + bookDate.toDateString() + "<br>" +
+                        "<strong>Description:</strong> " + description + "<br>";
+
+                    list.appendChild(listItem);
+                }
+            }
+        }
+
+        // Load and display the XML data when the page loads
+        window.onload = function () {
+            loadXML();
+        };
+    </script>
+</body>
+
+</html>
