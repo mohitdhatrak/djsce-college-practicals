@@ -45,3 +45,9 @@
 
 ### Final Tree -
 ![image](https://github.com/mohitdhatrak/djsce-college-practicals/assets/91209576/62dc5dbf-8f8f-4252-9688-3cc77ea343b7)
+
+## solved example - 
+
+![image](https://github.com/mohitdhatrak/djsce-college-practicals/assets/91209576/6e25543c-2552-4470-945f-d2a2cc7bc691)
+
+![image](https://github.com/mohitdhatrak/djsce-college-practicals/assets/91209576/08cef06f-0eb0-4903-b3b8-de0bc6d29d96)
