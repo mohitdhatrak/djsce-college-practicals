@@ -22,6 +22,9 @@
 ![image](https://github.com/mohitdhatrak/djsce-college-practicals/assets/91209576/050278d4-bfd9-4061-97fb-fc26ec044d22)
 
 ## Code implementation
+- same level of indentation means those nodes are at the same level in the tree
+- each child node printed below its parent
+- left or right child and colours mentioned for each node
 
 ![image](https://github.com/mohitdhatrak/djsce-college-practicals/assets/91209576/6534546e-ff74-4c93-bc72-b175aec66c5c)
 
