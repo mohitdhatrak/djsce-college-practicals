@@ -156,7 +156,7 @@ def print_tree(node, indent=0, prefix="root"):
     if indent == 0:
         print()
     if node is not None:
-        print(f"{'' if indent == 0 else '|'}" + "--" * indent + f"{'' if indent == 0 else ' '}" + f"{prefix}: {node.value} {node.colour}")
+        print(f"{'' if indent == 0 else '|' * indent}" + "--" * indent + f"{'' if indent == 0 else ' '}" + f"{prefix}: {node.value} {node.colour}")
         print_tree(node.left, indent + 1, "left")
         print_tree(node.right, indent + 1, "right")
 
