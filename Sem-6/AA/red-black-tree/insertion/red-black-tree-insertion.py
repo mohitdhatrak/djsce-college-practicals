@@ -108,51 +108,47 @@ def check_whole_tree(node):
     else:
         return None   
 
-def insert_node(input_values):
+def insert_node(value):
     global root_node
-    root_node = node(input_values[0], None, None, None, 'B')
     current_parent = root_node
+    current_value = value
+    parent_found = False
+    
+    while not parent_found: # traverse to get the parent node for current value, then insert
+        if current_value < current_parent.value:
+            if current_parent.left is None:
+                new_node = node(current_value, None, None, current_parent, 'R')
+                current_parent.left = new_node # inserted new node
+                parent_found = True
 
-    for i in range(1, len(input_values)):
-        current_parent = root_node
-        parent_found = False
-        current_value = input_values[i]
-        
-        while not parent_found: # traverse to get the parent node for current value, then insert
-            if current_value < current_parent.value:
-                if current_parent.left is None:
-                    new_node = node(current_value, None, None, current_parent, 'R')
-                    current_parent.left = new_node # inserted new node
-                    parent_found = True
+                # after insertion, handle R-R conflict if any
+                is_conflict = check_conflict(new_node, current_parent, 'normal')
 
-                    # after insertion, handle R-R conflict if any
-                    is_conflict = check_conflict(new_node, current_parent, 'normal')
-
-                    # check for any new R-R conflicts in whole tree
-                    if is_conflict:
-                        conflict_node = check_whole_tree(root_node)
-                        if conflict_node is not None:
-                            print("\nNEW R-R conflict")
-                            check_conflict(conflict_node, conflict_node.parent, 'special')
-                else:
-                    current_parent = current_parent.left
+                # check for any new R-R conflicts in whole tree
+                if is_conflict:
+                    conflict_node = check_whole_tree(root_node)
+                    if conflict_node is not None:
+                        print("\nNEW R-R conflict")
+                        check_conflict(conflict_node, conflict_node.parent, 'special')
             else:
-                if current_parent.right is None:
-                    new_node = node(current_value, None, None, current_parent, 'R')
-                    current_parent.right = new_node # inserted new node 
-                    parent_found = True
+                current_parent = current_parent.left
+        else:
+            if current_parent.right is None:
+                new_node = node(current_value, None, None, current_parent, 'R')
+                current_parent.right = new_node # inserted new node 
+                parent_found = True
 
-                    # after insertion, handle R-R conflict if any
-                    is_conflict = check_conflict(new_node, current_parent, 'normal')
+                # after insertion, handle R-R conflict if any
+                is_conflict = check_conflict(new_node, current_parent, 'normal')
 
-                    # check for any new R-R conflicts in whole tree
-                    if is_conflict:
-                        conflict_node = check_whole_tree(root_node)
-                        if conflict_node is not None:
-                            print("NEW R-R conflict")
-                            check_conflict(conflict_node, conflict_node.parent, 'special')
-                else:
-                    current_parent = current_parent.right 
+                # check for any new R-R conflicts in whole tree
+                if is_conflict:
+                    conflict_node = check_whole_tree(root_node)
+                    if conflict_node is not None:
+                        print("NEW R-R conflict")
+                        check_conflict(conflict_node, conflict_node.parent, 'special')
+            else:
+                current_parent = current_parent.right 
 
     return root_node
                 
@@ -165,12 +161,14 @@ def print_tree(node, indent=0, prefix="root"):
         print_tree(node.right, indent + 1, "right")
 
 # RUN - to get full tree
-# root_node = node(None, None, None, None, 'B')
 # input_values = [13, 21, 10, 18, 19, 33, 28, 43, 63, 5, 4, 74]
-# root_node = insert_node(input_values)
+# root_node = node(input_values[0], None, None, None, 'B')
+# for i in range(1, len(input_values)):
+#     root_node = insert_node(input_values[i])
 # print_tree(root_node)
 
 # RUN - to get tree for each insertion
+root_node = node(None, None, None, None, None)
 input_values = []
 while True:
     print("Action Menu:")
@@ -183,8 +181,10 @@ while True:
         value = int(input("Enter node value: "))
         input_values.append(value)
         
-        # since I am not storing the tree anywhere, for each new node, all previous nodes are also inserted again stepwise
-        root_node = insert_node(input_values)
+        if len(input_values) == 1:
+            root_node = node(value, None, None, None, 'B')
+        else:
+            root_node = insert_node(value)
         print_tree(root_node)
         print()
     elif choice == 2:
