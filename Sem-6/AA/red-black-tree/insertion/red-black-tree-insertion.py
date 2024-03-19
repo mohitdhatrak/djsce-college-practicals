@@ -2,7 +2,7 @@ import copy
 
 
 class node:
-    def __init__(self, value, left, right, parent, colour):
+    def __init__(self, value, colour, left, right, parent):
         self.value = value
         self.colour = colour
         self.left = left
@@ -117,7 +117,7 @@ def insert_node(value):
     while not parent_found: # traverse to get the parent node for current value, then insert
         if current_value < current_parent.value:
             if current_parent.left is None:
-                new_node = node(current_value, None, None, current_parent, 'R')
+                new_node = node(current_value, 'R', None, None, current_parent)
                 current_parent.left = new_node # inserted new node
                 parent_found = True
 
@@ -134,7 +134,7 @@ def insert_node(value):
                 current_parent = current_parent.left
         else:
             if current_parent.right is None:
-                new_node = node(current_value, None, None, current_parent, 'R')
+                new_node = node(current_value, 'R', None, None, current_parent)
                 current_parent.right = new_node # inserted new node 
                 parent_found = True
 
@@ -162,7 +162,7 @@ def print_tree(node, indent=0, prefix="root"):
 
 # RUN - to get full tree
 # input_values = [13, 21, 10, 18, 19, 33, 28, 43, 63, 5, 4, 74]
-# root_node = node(input_values[0], None, None, None, 'B')
+# root_node = node(input_values[0], 'B', None, None, None)
 # for i in range(1, len(input_values)):
 #     root_node = insert_node(input_values[i])
 # print_tree(root_node)
@@ -182,7 +182,7 @@ while True:
         input_values.append(value)
         
         if len(input_values) == 1:
-            root_node = node(value, None, None, None, 'B')
+            root_node = node(value, 'B', None, None, None)
         else:
             root_node = insert_node(value)
         print_tree(root_node)
