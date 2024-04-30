@@ -16,7 +16,7 @@
 
 ![image](https://github.com/mohitdhatrak/djsce-college-practicals/assets/91209576/68fd1256-035f-44cf-bdc2-7a4a8aaf9230)
 
-#### Case 2 and 3
+#### Cases 2 and 3
 - hardcoded tree
 
 ![image](https://github.com/mohitdhatrak/djsce-college-practicals/assets/91209576/9a3e22dd-1884-4aac-8fea-2576de37072a)
@@ -34,6 +34,11 @@
 ![image](https://github.com/mohitdhatrak/djsce-college-practicals/assets/91209576/2b957c04-3b05-4c52-a9eb-b55f70f85573)
 - output
 
+![image](https://github.com/mohitdhatrak/djsce-college-practicals/assets/91209576/e4692e84-7f02-4a02-b23b-507b45ee52d7)
+![image](https://github.com/mohitdhatrak/djsce-college-practicals/assets/91209576/235194ee-abe1-4ca4-85f4-29d128c57bd7)
+![image](https://github.com/mohitdhatrak/djsce-college-practicals/assets/91209576/344f980a-08d0-45c4-9215-9ca59665d78a)
+![image](https://github.com/mohitdhatrak/djsce-college-practicals/assets/91209576/91ed63ae-58a4-462c-8e0a-8c40089cce4e)
+![image](https://github.com/mohitdhatrak/djsce-college-practicals/assets/91209576/4a7ddf31-84bc-4550-a2c6-b91d85e53fb9)
 
 #### Case 5 - remove red leaf node
 - hardcoded tree
