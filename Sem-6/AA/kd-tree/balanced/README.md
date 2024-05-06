@@ -7,4 +7,4 @@
 
 ###  Sample input values = [[3, 6], [17, 15], [13, 15], [6, 12], [9, 1], [2, 7], [10, 19]]
 
-![image](https://github.com/mohitdhatrak/djsce-college-practicals/assets/91209576/d0ebc204-438d-4460-b9f6-b5566211f57c)
+![image](https://github.com/mohitdhatrak/djsce-college-practicals/assets/91209576/76010441-aa6e-40d1-bb2d-dc50ab7d857e)
