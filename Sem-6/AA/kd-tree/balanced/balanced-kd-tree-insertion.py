@@ -71,7 +71,7 @@ for i in range(midpoint + 1, len(sorted_input)):
 current_compare = 1
 round = 1
 while len(left) != 0 and len(right) != 0:
-    print(f"Round {round} (sorted by {'x' if round % 2 == 0 else 'y'}):")
+    print(f"\nRound {round} (sorted by {'x' if round % 2 == 0 else 'y'}):")
     if len(left) != 0:
         left = sorted(left, key=lambda x: x[current_compare])
         print("Left nodes:", left)
