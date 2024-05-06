@@ -75,18 +75,21 @@ round = 1
 
 while len(left) != 0 and len(right) != 0:
     print(f"\nRound {round} (sorted by {'x' if round % 2 == 0 else 'y'}):")
+    
     if len(left) != 0:
         left = sorted(left, key=lambda x: x[current_compare])
         print("Left nodes:", left)
         left_mid = int(len(left) / 2) if len(left) % 2 != 0 else int(len(left) / 2) - 1 
         insert_node(left[left_mid], "left")
         left.remove(left[left_mid])
+
     if len(right) != 0:
         right = sorted(right, key=lambda x: x[current_compare])
         print("Right nodes:", right)
         right_mid = int(len(right) / 2) if len(right) % 2 != 0 else int(len(right) / 2) - 1 
         insert_node(right[right_mid], "right")
         right.remove(right[right_mid])
+    
     current_compare = toggle_compare(current_compare)
     round += 1
 
