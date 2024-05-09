@@ -3,22 +3,22 @@ import random
 normal_count = 0
 randomized_count = 0
 
-def quick_sort(arr, first, last):
+def quick_sort(arr, first, last, selected_pivots):
     global normal_count
     
     if first < last:
         normal_count += 1 # to count first < last comparison, when true
-        end = partition(arr, first, last)
-        quick_sort(arr, first, end - 1)
-        quick_sort(arr, end + 1, last)
+        end = partition(arr, first, last, selected_pivots)
+        quick_sort(arr, first, end - 1, selected_pivots)
+        quick_sort(arr, end + 1, last, selected_pivots)
     else:
         normal_count += 1 # to count first < last comparison, when false
     
-def partition(arr, first, last):
-    # needed to tell function that scope of this variable needs to be considered as global
+def partition(arr, first, last, selected_pivots):
     global normal_count
     
     pivot = first
+    selected_pivots.append(pivot)
     i = first
     j = last
     
@@ -38,28 +38,27 @@ def partition(arr, first, last):
         if i < j:
             arr[i], arr[j] = arr[j], arr[i]
             normal_count +=1
-
-    normal_count += 1 # to count i < j comparison, when false
               
     arr[pivot], arr[j] = arr[j], arr[pivot]
     return j
 
-def randomized_quick_sort(arr, first, last):
+def randomized_quick_sort(arr, first, last, selected_pivots):
     global randomized_count
     
     if first < last:
         randomized_count += 1 # to count first < last comparison, when true       
-        end = randomized_partition(arr, first, last)
-        randomized_quick_sort(arr, first, end - 1)
-        randomized_quick_sort(arr, end + 1, last)
+        end = randomized_partition(arr, first, last, selected_pivots)
+        randomized_quick_sort(arr, first, end - 1, selected_pivots)
+        randomized_quick_sort(arr, end + 1, last, selected_pivots)
     else:
         randomized_count += 1 # to count first < last comparison, when false
         
-def randomized_partition(arr, first, last):
+def randomized_partition(arr, first, last, selected_pivots):
     global randomized_count
     
     # randomly selecting the pivot
     pivot = random.randint(first, last)
+    selected_pivots.append(pivot)
     i = first
     j = last
     
@@ -78,23 +77,32 @@ def randomized_partition(arr, first, last):
             arr[i], arr[j] = arr[j], arr[i]
             randomized_count +=1
 
-    randomized_count += 1 # to count i < j comparison, when false
-
     arr[pivot], arr[j] = arr[j], arr[pivot]
     return j
 
-# worst case for quicksort
-# arr = [1, 2, 3, 4, 5, 6, 7, 8]
-# arr = [8, 7, 6, 5, 4, 3, 2, 1]
-arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40]
+# worst case for quicksort (asc or desc order)
+# arr = [40, 39, 38, 37, 36, 35, 34, 33, 32, 31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+arr = [i for i in range(1, 41)]
+arr.reverse()
+print("Initial array:", arr)
+
+selected_pivots = []
 n = len(arr)
-quick_sort(arr, 0, n - 1)
+quick_sort(arr, 0, n - 1, selected_pivots)
 print("Sorted array:", arr)
+print("Selected pivots:", selected_pivots)
+print("Number of selected pivots:", len(selected_pivots))
 print("No. of comparisons in quicksort:", normal_count)
 
 # same case with randomized quicksort
-arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40]
-randomized_quick_sort(arr, 0, n - 1)
+arr = [i for i in range(1, 41)]
+arr.reverse()
+print("\nInitial array:", arr)
 
+selected_pivots = []
+n = len(arr)
+randomized_quick_sort(arr, 0, n - 1, selected_pivots)
 print("Sorted array:", arr)
+print("Selected pivots:", selected_pivots)
+print("Number of selected pivots:", len(selected_pivots))
 print("No. of comparisons in randomized quicksort:", randomized_count)
