@@ -1,18 +1,19 @@
 flag = 1
+n = 20 # or can take user input
 
 while flag != 0:
     flag = 0
     insertCost = 1
     arrSize = 0
 
-    amortized = int(input("Enter estimate cost: "))
+    amortized = int(input("\nEnter estimate cost: "))
     bank = 0
 
     arr = []
 
     print("Element Size  Insert  Double  Total  Amortized Bank")
 
-    for i in range(10):
+    for i in range(n):
         doublingCost = 0
 
         if arrSize == 0:
@@ -28,6 +29,7 @@ while flag != 0:
 
         totalCost = insertCost + doublingCost
 
+        # underestimate
         if amortized - totalCost + bank < 0:
             bank = bank + (amortized - totalCost)
             print(
@@ -37,7 +39,7 @@ while flag != 0:
             flag = -1
             break
 
-        # overestimate logic is a bit flawed, works for 8 but not for higher costs
+        # overestimate logic -- we can keep whatever we want, there is no logic to determine overestimate, here i assume totalcost 5 times more in bank is overestimate (only when bank is needed to be used)
         elif amortized - totalCost < 0 and bank > 5 * totalCost:
             bank = bank + (amortized - totalCost)
             print(
@@ -51,3 +53,5 @@ while flag != 0:
         print(
             f"{arr[i]}\t{arrSize}\t{insertCost}\t{doublingCost}\t{totalCost}\t{amortized}\t{bank}"
         )
+
+print(f"For {n} elements, above amortized cost is a good estimate!")
