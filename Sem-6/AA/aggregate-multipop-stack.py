@@ -1,33 +1,40 @@
-def aggregate_multipop(n):
-    array = []
-    cost = 1  # cost to push or pop any element (cost of 1 operation)
-    total = 0
+# Multipop stack amortized analysis using aggregate method 
+# Assuming the multipop operation 
+# Cost of push : 1, Cost of pop : 1 and Cost of multipop(k) : min(len(stack), k)
+# Here each multipop can remove at max n elements from the stack and there can be n such operations the worst case time complexity turns out to be O(n^2) which is not a very tight bound or and overestimate.
+# Aggregate method 
+# Since for every multipop(k) we need atleast k elements in the stack, hence we cannot multipop n elements n times and the worst case can not be more that O(n) and T(n) making the amortized cost to be T(n) / n 
 
-    print("Element\tOperation Cost")
+def push(stack, n, cost):
+    for i in range(n):
+        stack.append(i)
+        cost += 1
+    return stack, cost
+    
+def multipop(stack, n, cost):
+    for i in range(n):
+        k = int(input('\nEnter the number of elements to multipop: '))
+        for i in range(min(k, len(stack))):
+            stack.pop()
+            cost += 1
 
-    # push n elements in array
-    for i in range(1, n + 1):
-        total += cost
-        array.append(i)
-        print(i, "\t", cost)
+        print(f'Stack after multipop({i + 1}):', stack)
+        print(f'Cost after multipop({i + 1}):', cost)    
+    return stack, cost
 
-    print("Current stack:", array)
+stack = []
+cost = 0
+operations = 0
 
-    # multipop
-    k = int(input("\nEnter number of elements to multipop: "))
-    print(f"Performing multipop({k}):")
-    if len(array) < k:
-        print(f"No. of elements in array < {k}, so all elements get popped")
-    for j in range(min(k, len(array))):
-        if array:
-            array.pop()
-            total += cost
-        print(f"Stack after pop {j + 1}:", array)
+n = int(input('Enter the number of elements to push in stack: '))
+operations += n # each push and pop counts as 1 operation, and has cost 1
+stack, cost = push(stack, n, cost)
+print(f'Stack after {n} push operations:', stack)
+print(f'Cost after {n} push operations:', cost)
 
-    # amortized cost = total operations cost / n
-    return total / n
+n = int(input('\nEnter the number of multipop operations to perform: '))
+operations += n # each multipop(k) counts as 1 operation, and has cost as k
+stack, cost = multipop(stack, n, cost)
 
-
-n = int(input("Enter number of elements to push in array: "))
-a = aggregate_multipop(n)
-print("\nAmortized cost for pushing elements and performing multipop =", a)
+amortized_cost = cost / operations
+print('\nAmortized Cost per operation:', round(amortized_cost, 2))    
