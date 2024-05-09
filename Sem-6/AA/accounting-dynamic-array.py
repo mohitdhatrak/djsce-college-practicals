@@ -18,10 +18,10 @@ while flag != 0:
 
         if arrSize == 0:
             arr.append(i + 1)
-            arrSize = arrSize + 1
+            arrSize = 1
 
         else:
-            if arrSize - arr[i - 1] == 0:
+            if arrSize == len(arr): # means arr is full, need to double it
                 doublingCost = arrSize
                 arrSize = arrSize * 2
 
