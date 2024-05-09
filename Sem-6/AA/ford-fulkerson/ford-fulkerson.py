@@ -94,11 +94,10 @@ def get_all_paths():
     current_path = all_paths[0]
     index = 0
 
-    while current_path != all_paths[-1]: # till last element of path is not 
-        if current_path[-1] != sink:
+    while current_path != all_paths[-1]: # till last element of all paths array is not reached
+        if current_path[-1] != sink: # if last node of path is not sink, then path is incomplete, fetch possible paths
             possible_paths(current_path, all_paths)
             all_paths.remove(current_path)
-            index = 0
         else:
             index += 1
         
@@ -120,7 +119,7 @@ for path in possible_paths:
         from_node = node_to_index[path[i]]
         to_node = node_to_index[path[i + 1]]
 
-        if residual_capacity[from_node][to_node] < bottleneck:
+        if residual_capacity[from_node][to_node] < bottleneck: # we find the min value and set it as bottleneck
             bottleneck = residual_capacity[from_node][to_node]
     
     if bottleneck > 0: # this means path can be considered
