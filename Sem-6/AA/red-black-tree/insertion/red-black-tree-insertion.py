@@ -156,40 +156,40 @@ def print_tree(node, indent=0, prefix="root"):
     if indent == 0:
         print()
     if node is not None:
-        print(f"{'' if indent == 0 else '|' * indent}" + "--" * indent + f"{'' if indent == 0 else ' '}" + f"{prefix}: {node.value} {node.colour}")
+        print("|" * indent + "--" * indent + f"{'' if indent == 0 else ' '}" + f"{prefix}: {node.value} {node.colour}")
         print_tree(node.left, indent + 1, "left")
         print_tree(node.right, indent + 1, "right")
 
 # RUN - to get full tree
-# input_values = [13, 21, 10, 18, 19, 33, 28, 43, 63, 5, 4, 74]
-# root_node = node(input_values[0], 'B', None, None, None)
-# for i in range(1, len(input_values)):
-#     root_node = insert_node(input_values[i])
-# print_tree(root_node)
+input_values = [13, 21, 10, 18, 19, 33, 28, 43, 63, 5, 4, 74]
+root_node = node(input_values[0], 'B', None, None, None)
+for i in range(1, len(input_values)):
+    root_node = insert_node(input_values[i])
+print_tree(root_node)
 
 # RUN - to get tree for each insertion
-root_node = node(None, None, None, None, None)
-input_values = []
-while True:
-    print("Action Menu:")
-    print("1. Insert node and print tree")
-    print("2. Stop")
+# root_node = node(None, None, None, None, None)
+# input_values = []
+# while True:
+#     print("Action Menu:")
+#     print("1. Insert node and print tree")
+#     print("2. Stop")
     
-    choice = int(input("Enter your choice: "))
+#     choice = int(input("Enter your choice: "))
     
-    if choice == 1:
-        value = int(input("Enter node value: "))
-        input_values.append(value)
+#     if choice == 1:
+#         value = int(input("Enter node value: "))
+#         input_values.append(value)
         
-        if len(input_values) == 1:
-            root_node = node(value, 'B', None, None, None)
-        else:
-            root_node = insert_node(value)
-        print_tree(root_node)
-        print()
-    elif choice == 2:
-        print("Node insertion complete")
-        break
+#         if len(input_values) == 1:
+#             root_node = node(value, 'B', None, None, None)
+#         else:
+#             root_node = insert_node(value)
+#         print_tree(root_node)
+#         print()
+#     elif choice == 2:
+#         print("Node insertion complete")
+#         break
 
-    else:
-        print("Invalid input!\n")
+#     else:
+#         print("Invalid input!\n")
