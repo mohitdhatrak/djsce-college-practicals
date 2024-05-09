@@ -37,4 +37,6 @@ operations += n # each multipop(k) counts as 1 operation, and has cost as k
 stack, cost = multipop(stack, n, cost)
 
 amortized_cost = cost / operations
-print('\nAmortized Cost per operation:', round(amortized_cost, 2))    
+print('\nTotal cost =', cost)
+print('Total operations =', operations)
+print('Amortized Cost per operation:', round(amortized_cost, 2))    
