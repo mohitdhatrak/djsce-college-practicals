@@ -2,39 +2,78 @@ def print_matrix(matrix):
     for row in matrix:
         print(row)
 
-flow = [[0, 0, 0, 0, 0], 
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0]] 
+# example 1 - image in readme
+# flow = [[0, 0, 0, 0, 0], 
+#         [0, 0, 0, 0, 0],
+#         [0, 0, 0, 0, 0],
+#         [0, 0, 0, 0, 0],
+#         [0, 0, 0, 0, 0]] 
 
-capacity = [[0, 7, 2, 4, 0], 
-            [0, 0, 0, 8, 10],
-            [0, 0, 0, 1, 0],
-            [0, 0, 0, 0, 5],
-            [0, 0, 0, 0, 0]]
+# capacity = [[0, 7, 2, 4, 0], 
+#             [0, 0, 0, 8, 10],
+#             [0, 0, 0, 1, 0],
+#             [0, 0, 0, 0, 5],
+#             [0, 0, 0, 0, 0]]
+
+# print("Initial capacity matrix:")
+# print_matrix(capacity)
+
+# residual capacity = capacity - flow (initially flow = 0 so this is same as capacity)
+# residual_capacity = [[0, 7, 2, 4, 0], 
+#                      [0, 0, 0, 8, 10],
+#                      [0, 0, 0, 1, 0],
+#                      [0, 0, 0, 0, 5],
+#                      [0, 0, 0, 0, 0]]
+
+# example 2 - https://iq.opengenus.org/maximum-flow-problem-overview
+flow = [[0, 0, 0, 0, 0, 0], 
+        [0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0]] 
+
+capacity = [[0, 8, 10, 0, 0, 0], 
+            [0, 0, 0, 2, 7, 0],
+            [0, 3, 0, 0, 12, 0],
+            [0, 0, 0, 0, 0, 10],
+            [0, 0, 0, 4, 0, 8], 
+            [0, 0, 0, 0, 0, 0]]
 
 print("Initial capacity matrix:")
 print_matrix(capacity)
 
-# residual capacity = capacity - flow (initially flow = 0 so this is same as capacity)
-residual_capacity = [[0, 7, 2, 4, 0], 
-                     [0, 0, 0, 8, 10],
-                     [0, 0, 0, 1, 0],
-                     [0, 0, 0, 0, 5],
-                     [0, 0, 0, 0, 0]]
+residual_capacity = [[0, 8, 10, 0, 0, 0], 
+                     [0, 0, 0, 2, 7, 0],
+                     [0, 3, 0, 0, 12, 0],
+                     [0, 0, 0, 0, 0, 10],
+                     [0, 0, 0, 4, 0, 8], 
+                     [0, 0, 0, 0, 0, 0]]
 
-num_of_nodes = 5
-source = 'S'
-sink = 'T'
+num_of_nodes = len(capacity)
 max_flow = 0
 
+# source = 'S'
+# sink = 'T'
+
+# node_to_index = {
+#     'S': 0,
+#     'A': 1,
+#     'B': 2,
+#     'C': 3,
+#     'T': 4
+# }
+
+source = '1'
+sink = '6'
+
 node_to_index = {
-    'S': 0,
-    'A': 1,
-    'B': 2,
-    'C': 3,
-    'T': 4
+    '1': 0,
+    '2': 1,
+    '3': 2,
+    '4': 3,
+    '5': 4,
+    '6': 5
 }
 
 index_to_node = {v: k for k, v in node_to_index.items()} # or simply type the reverse of above object
