@@ -1,5 +1,6 @@
 import random
 
+# this is not necessary, directly assume 10 candidates with name and rank in each object, no need to calculate the rank
 candidates = [
     {"name": "Alice", "experience": 3, "prev_salary": 10000, "projects": 2},
     {"name": "Bob", "experience": 5, "prev_salary": 12000, "projects": 4},
@@ -13,13 +14,11 @@ candidates = [
     {"name": "Julia", "experience": 5, "prev_salary": 15000, "projects": 8},
 ]
 
-
 def sort_data(obj):
     return (
         3 * obj["experience"] + 2 * obj["projects"] + obj["prev_salary"],
         obj["name"],
     )
-
 
 sorted_by_rank = sorted(candidates, key=sort_data, reverse=True)
 
@@ -27,13 +26,12 @@ for i, candidate in enumerate(sorted_by_rank, start=1):
     candidate["rank"] = i
     print(f"Rank {candidate['rank']}: {candidate['name']}")
 
-
 def hiring_process(candidates_order):
     interview_cost = 1000  # fixed cost per interview for company
     hiring_cost = 0  # cost of hiring new employee + cost of firing prev employee
     # cost of hiring new employee -> 1000 fixed
     # firingCost -> days_worked * pay_per_day
-    # total_cost = interview_cost + hiring_cost ---> total cost for company per employee
+    # total_cost = interview_cost + hiring_cost --> total cost for company per employee
     pay_per_day = 2000
     days_worked = 0
     employee_rank = 100  # random high int value
@@ -41,6 +39,7 @@ def hiring_process(candidates_order):
     formula_cost = 0
     n = len(candidates)
     m = 0  # number of hired employees
+    hiring_cost_sum = 0
 
     print("Rank Interview Hiring TotalCost")
     for i in range(len(candidates_order)):
@@ -49,6 +48,7 @@ def hiring_process(candidates_order):
             m += 1
             employee_rank = sorted_by_rank[position]["rank"]
             hiring_cost = 1000 + pay_per_day * days_worked
+            hiring_cost_sum += hiring_cost
             days_worked = 1
         else:
             days_worked += 1
@@ -61,18 +61,20 @@ def hiring_process(candidates_order):
             f"{sorted_by_rank[position]['rank']}\t{interview_cost}\t{hiring_cost}\t{total_cost}"
         )
 
+    print("Number of candidates hired:", m)
     print("Total cost of company:", company_cost)
 
     # this is pending ...
-    # formula_cost = n * interview_cost + m * hiring_cost
-    # print("Total cost of company as per formula:", formula_cost)
-
+    formula_cost = n * interview_cost + hiring_cost_sum # hiring_cost_sum --> m * hiring_cost i.e. hiring cost of each hired candidate
+    print("Total cost of company as per formula:", formula_cost)
 
 # best candidate is rank 1
 worst_order = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
 print("\nWorst case rank order:", worst_order)
 hiring_process(worst_order)
 
-random_order = random.sample(range(1, 11), 10)
+# random_order = random.sample(range(1, 11), 10)
+random.shuffle(worst_order) # shuffles the array in place, does not return new array
+random_order = worst_order
 print("\nRandom rank order:", random_order)
 hiring_process(random_order)
