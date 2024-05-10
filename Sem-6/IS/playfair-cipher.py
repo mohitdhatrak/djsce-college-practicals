@@ -1,12 +1,7 @@
 import random
 
-
-def print_matrix(matrix):
-    for row in matrix:
-        print(row)
-
 # J not included
-char = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+char = "ABCDEFGHIKLMNOPQRSTUVWXYZ"
 
 # key = input("Enter key: ")
 key = "monarchy"
@@ -14,6 +9,7 @@ key = "monarchy"
 # if key has J replace it with I
 key = key.upper().replace(" ", "") # remove space char
 modified_key = key.replace("J", "I")
+print("Key:", modified_key)
 
 char_not_in_key = list(filter(lambda x: x.upper() not in modified_key, char))
 mask_char = list(modified_key) + char_not_in_key
@@ -29,8 +25,9 @@ for i in range(5):
 
     mask.append(arr)
 
-print("Mask:")
-print_matrix(mask)
+print("\nMask:", end="")
+for row in mask:
+    print("\t", row)
 
 # text = input("Enter plain text: ")
 text = "hello world"
@@ -38,9 +35,10 @@ text = "hello world"
 # if plain text has J replace it with I
 text = text.upper().replace(" ", "") # remove space char
 modified_text = text.replace("J", "I")
+print("\nPlain text:", modified_text)
 
 char_not_in_text = list(filter(lambda x: x.upper() not in modified_text, char))
-print("\nList of characters not used in plain text:", char_not_in_text)
+print("List of characters not used in plain text:", char_not_in_text)
 
 # to avoid same letter pairs - we add bogus char
 # we remove the used bogus char from the above list to avoid case like ['LR', 'LR'] i.e. pairs to be repeated
@@ -101,4 +99,4 @@ for pair in digraph_arr:
         column2 = char1[1]
         cipher += mask[row1][column1] + mask[row2][column2]
 
-print("Ciphered text:", cipher)
+print("\nCiphered text:", cipher)
