@@ -56,11 +56,11 @@ if len(modified_text) % 2 != 0:
     modified_text = modified_text + random_char
     char_not_in_text.remove(random_char)
 
-print("\nModified text:", modified_text)
+print("\nText after adding bogus letters:", modified_text)
 
 # array of pair of 2 letters from text (array of digraphs)
 digraph_arr = [modified_text[i : i + 2] for i in range(0, len(modified_text), 2)] # 3rd param in range is 'step', so i increments by 2
-print("Digraphs of modified text:", digraph_arr)
+print("Digraphs of text:", digraph_arr)
 
 # returns position of letter in 5x5 mask matrix as tuple
 def get_element_position(arr, target):
