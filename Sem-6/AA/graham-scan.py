@@ -2,8 +2,8 @@ import math
 
 
 def polar_angle(point):
-    x1, y1 = point
-    angle = math.atan2(y1, x1)  
+    x, y = point
+    angle = math.atan2(y, x) # tan inverse of y / x
     return math.degrees(angle)
 
 def turn_calculator(prev, curr, next):
