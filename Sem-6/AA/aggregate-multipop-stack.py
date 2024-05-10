@@ -9,7 +9,7 @@ def push(stack, n, cost):
     for i in range(n):
         stack.append(i)
         cost += 1
-    return stack, cost
+    return cost
     
 def multipop(stack, n, cost):
     for i in range(n):
@@ -18,9 +18,9 @@ def multipop(stack, n, cost):
             stack.pop()
             cost += 1
 
-        print(f'Stack after multipop({i + 1}):', stack)
-        print(f'Cost after multipop({i + 1}):', cost)    
-    return stack, cost
+        print(f'Stack after multipop({k}):', stack)
+        print(f'Cost after multipop({k}):', cost)    
+    return cost
 
 stack = []
 cost = 0
@@ -28,13 +28,13 @@ operations = 0
 
 n = int(input('Enter the number of elements to push in stack: '))
 operations += n # each push and pop counts as 1 operation, and has cost 1
-stack, cost = push(stack, n, cost)
+cost = push(stack, n, cost)
 print(f'Stack after {n} push operations:', stack)
 print(f'Cost after {n} push operations:', cost)
 
 n = int(input('\nEnter the number of multipop operations to perform: '))
 operations += n # each multipop(k) counts as 1 operation, and has cost as k
-stack, cost = multipop(stack, n, cost)
+cost = multipop(stack, n, cost)
 
 amortized_cost = cost / operations
 print('\nTotal cost =', cost)
