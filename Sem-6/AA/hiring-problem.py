@@ -64,7 +64,6 @@ def hiring_process(candidates_order):
     print("Number of candidates hired:", m)
     print("Total cost of company:", company_cost)
 
-    # this is pending ...
     formula_cost = n * interview_cost + hiring_cost_sum # hiring_cost_sum --> m * hiring_cost i.e. hiring cost of each hired candidate
     print("Total cost of company as per formula:", formula_cost)
 
