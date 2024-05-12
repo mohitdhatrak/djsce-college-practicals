@@ -4,15 +4,21 @@ import random
 char = "ABCDEFGHIKLMNOPQRSTUVWXYZ"
 
 # key = input("Enter key: ")
-key = "monarchy"
+key = "monarchyyy"
 
 # if key has J replace it with I
 key = key.upper().replace(" ", "") # remove space char
 modified_key = key.replace("J", "I")
 print("Key:", modified_key)
 
-char_not_in_key = list(filter(lambda x: x.upper() not in modified_key, char))
-mask_char = list(modified_key) + char_not_in_key
+# removing duplicate char from modified_key
+unique_char_in_key = []
+for letter in modified_key:
+  if (letter not in unique_char_in_key):
+    unique_char_in_key.append(letter)
+
+char_not_in_key = list(filter(lambda x: x.upper() not in unique_char_in_key, char))
+mask_char = unique_char_in_key + char_not_in_key
 
 # make a random 5x5 matrix
 mask = []
@@ -46,7 +52,7 @@ for i in range(len(text) - 1):
     position = i
     if text[i] == text[i + 1]:
         random_char = random.choice(char_not_in_text)
-        modified_text = text[: position + 1] + random_char + text[position + 1 :]
+        modified_text = modified_text[: position + 1] + random_char + modified_text[position + 1 :]
         char_not_in_text.remove(random_char)
     i += 1
 
