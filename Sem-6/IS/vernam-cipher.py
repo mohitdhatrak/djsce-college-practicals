@@ -1,25 +1,39 @@
-plain = input("Enter plain text: ")
-print("Length of plain text is", len(plain))
+import random
 
-cipher = ""
-decipher = ""
+alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
-# issue - maybe key needs to be generated randomly of same size, not to ask user key
-# key has to be random and not to be reused
-key = input("Enter key value (length same as plain text): ")
-print("Length of key is", len(key))
+def encrypt(text, key):
+    cipher = ""
 
-if len(key) != len(plain):
-    print("Error! Length of key is not same as plain text!")
-else:
-    for i in range(0, len(plain)):
-        encrypt = ord(plain[i]) ^ ord(key[i])
-        cipher += chr(encrypt)
+    for char1, char2 in zip(text, key):
+        position = (alphabets.index(char1) ^ alphabets.index(char2)) % 26
+        cipher += alphabets[position]
 
-    print("Ciphered text:", cipher)
+    return cipher
 
-    for i in range(0, len(plain)):
-        decrypt = ord(cipher[i]) ^ ord(key[i])
-        decipher += chr(decrypt)
+def decrypt(text, key):
+    decipher = ""
 
-    print("Deciphered text:", decipher)
+    for char1, char2 in zip(text, key):
+        position = (alphabets.index(char1) ^ alphabets.index(char2)) % 26
+        decipher += alphabets[position]
+
+    return decipher
+
+# message = input("Enter plain text: ")
+message = "HelloWorld"
+print("Length of plain text is", len(message))
+message = message.upper()
+
+key = ""
+for i in range(len(message)):
+    key += random.choice(alphabets)
+print("Random key (length same as plain text):", key)
+key = key.upper()
+
+cipher = encrypt(message, key)
+print("Ciphered text:", cipher)
+
+# this won't be accurate as we do mod 26 when we create cipher text, we can't reverse that?
+decipher = decrypt(cipher, key)
+print("Deciphered text:", decipher)
