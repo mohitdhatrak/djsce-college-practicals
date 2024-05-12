@@ -1,9 +1,7 @@
 def encrypt(text, shift):
     cipher = ""
 
-    for i in range(len(text)):
-        char = text[i]
-
+    for char in text:
         if char in uppercase: # upper case letter
             position = (uppercase.index(char) + shift) % 26 # get index of char, then shift it to get new index
             cipher += uppercase[position]
@@ -17,9 +15,7 @@ def encrypt(text, shift):
 def decrypt(text, shift):
     decipher = ""
 
-    for i in range(len(text)):
-        char = text[i]
-
+    for char in text:
         if char in uppercase: # upper case letter
             position = (uppercase.index(char) - shift) % 26
             decipher += uppercase[position]
