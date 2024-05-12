@@ -4,13 +4,13 @@ def encrypt(text, shift):
     for i in range(len(text)):
         char = text[i]
 
-        if char in uppercase_alphabets: # upper case letter
-            position = (uppercase_alphabets.index(char) + shift) % 26 # get index of char, then shift it to get new index
-            cipher += uppercase_alphabets[position]
+        if char in uppercase: # upper case letter
+            position = (uppercase.index(char) + shift) % 26 # get index of char, then shift it to get new index
+            cipher += uppercase[position]
 
         else: # lower case letter
-            position = (lowercase_alphabets.index(char) + shift) % 26
-            cipher += lowercase_alphabets[position]
+            position = (lowercase.index(char) + shift) % 26
+            cipher += lowercase[position]
 
     return cipher
 
@@ -20,18 +20,18 @@ def decrypt(text, shift):
     for i in range(len(text)):
         char = text[i]
 
-        if char in uppercase_alphabets: # upper case letter
-            position = (uppercase_alphabets.index(char) - shift) % 26
-            decipher += uppercase_alphabets[position]
+        if char in uppercase: # upper case letter
+            position = (uppercase.index(char) - shift) % 26
+            decipher += uppercase[position]
 
         else: # lower case letter
-            position = (lowercase_alphabets.index(char) - shift) % 26
-            decipher += lowercase_alphabets[position]
+            position = (lowercase.index(char) - shift) % 26
+            decipher += lowercase[position]
 
     return decipher
 
-uppercase_alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-lowercase_alphabets = "abcdefghijklmnopqrstuvwxyz"
+uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+lowercase = "abcdefghijklmnopqrstuvwxyz"
 
 # message = input("Enter plain text: ")
 message = "helloworld"
