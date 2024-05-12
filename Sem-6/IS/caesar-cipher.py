@@ -30,7 +30,7 @@ def decrypt(text, shift):
     return decipher
 
 # message = input("Enter plain text: ")
-message = "helloworld"
+message = "HelloWorld"
 
 # shift = input("Enter shift value: ")
 shift = 3
