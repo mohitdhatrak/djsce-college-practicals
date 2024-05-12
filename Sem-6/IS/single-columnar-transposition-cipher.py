@@ -46,14 +46,15 @@ key = "Analyst"
 print("Key:", key)
 key_copy = key
 key_size = len(key)
-sorted_key = sorted(key)
+sorted_key = sorted(key.lower())
+print("Sorted key:", sorted_key)
 
 # initialize array with zeroes
 key_order = [0] * key_size
 
 for i in range(key_size):
     for j in range(key_size):
-        if sorted_key[i] == key_copy[j]:
+        if sorted_key[i] == key_copy[j].lower():
             key_order[j] = i + 1
             # to replace letter with '-' once it is matched (to avoid matching)
             key_copy = key_copy[0 : j] + "-" + key_copy[j + 1 :]
