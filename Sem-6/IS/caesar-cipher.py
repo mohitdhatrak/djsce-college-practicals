@@ -1,3 +1,6 @@
+uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+lowercase = "abcdefghijklmnopqrstuvwxyz"
+
 def encrypt(text, shift):
     cipher = ""
 
@@ -25,9 +28,6 @@ def decrypt(text, shift):
             decipher += lowercase[position]
 
     return decipher
-
-uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-lowercase = "abcdefghijklmnopqrstuvwxyz"
 
 # message = input("Enter plain text: ")
 message = "helloworld"
