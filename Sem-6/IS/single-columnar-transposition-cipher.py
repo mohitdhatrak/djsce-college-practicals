@@ -1,7 +1,7 @@
 import random
 
 
-def encrypt():
+def encrypt(matrix, key_order):
     cipher = ""
 
     for i in range(key_size):
@@ -12,8 +12,7 @@ def encrypt():
 
     return cipher
 
-def decrypt(text):
-    decipher = ""
+def decrypt(text, key_order):
     rows = int(message_size / key_size)
     deciphered_matrix = [[0] * key_size for _ in range(rows)] # initialize matrix with empty arrays
 
@@ -30,16 +29,7 @@ def decrypt(text):
         deciphered_arr += row
         print(row)
 
-    # remove the padding symbols
-    for i in range(len(deciphered_arr)):
-        if deciphered_arr[i] in padding:
-            # either make new array and use .remove() method or replace the char by '' if done in same array (as size will reduce)
-            deciphered_arr[i] = '' 
-    
-    # join all char in array to get a single string, then replace '_' with ' '
-    decipher = "".join(deciphered_arr).replace("_", " ")
-
-    return decipher
+    return deciphered_arr
 
 # key = input("Enter key: ")
 key = "Analyst"
@@ -91,9 +81,19 @@ for row in matrix:
         print(letter, end=" ")
     print()
 
-cipher = encrypt()
+cipher = encrypt(matrix, key_order)
 print("\nCiphered text:", cipher)
 
 # little complex - 
-decipher = decrypt(cipher)
+deciphered_arr = decrypt(cipher, key_order)
+
+# remove the padding symbols
+for i in range(len(deciphered_arr)):
+    if deciphered_arr[i] in padding:
+        # either make new array and use .remove() method or replace the char by '' if done in same array (as size will reduce)
+        deciphered_arr[i] = ''
+
+# join all char in array to get a single string, then replace '_' with ' '
+decipher = "".join(deciphered_arr).replace("_", " ")
+
 print("\nDeciphered text:", decipher)
