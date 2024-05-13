@@ -36,14 +36,14 @@ while d < phi:
     else:
         d += 1     
 
-public = (e, n)
-private = (d, n)
+public_key = (e, n)
+private_key = (d, n)
 
-print('\nPublic key (e, n):', public)
-print('Private key (d, n):', private)
+print('\nPublic key (e, n):', public_key)
+print('Private key (d, n):', private_key)
 
 cipher = pow(message, e) % n
-decipher = pow(cipher, d) % n
-
 print('\nCiphered text:', cipher)
+
+decipher = pow(cipher, d) % n
 print('Deciphered text:', decipher)
