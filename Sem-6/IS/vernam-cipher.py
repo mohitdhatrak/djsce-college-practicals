@@ -27,7 +27,7 @@ message = message.upper()
 
 key = ""
 for i in range(len(message)):
-    key += random.choice(alphabets)
+    key += random.choice(alphabets[:9]) # hack - if we take just the start few letters to generate key, then decipher will match mostly
 print("Random key (length same as plain text):", key)
 key = key.upper()
 
