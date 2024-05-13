@@ -7,7 +7,8 @@ p = 23
 g = 9
 a = 4
 b = 3
-secret_key = 9
+# secret_key = 9 -> answer
+
 print("Public key 'p' value:", p)
 print("Public key 'g' value:", g)
 print("Private key 'a' value:", a)

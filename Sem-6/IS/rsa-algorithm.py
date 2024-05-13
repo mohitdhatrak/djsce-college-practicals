@@ -43,7 +43,8 @@ print('\nPublic key (e, n):', public_key)
 print('Private key (d, n):', private_key)
 
 # in rsa algorithm, decryption is the important part as any random person should not be able to decrypt the message
-# so we decrypt with private key (and encrypt with public key)
+# so we decrypt the message with private key (and encrypt with public key)
+
 cipher = pow(message, e) % n
 print('\nCiphered text:', cipher)
 
