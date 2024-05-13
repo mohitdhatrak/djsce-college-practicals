@@ -33,8 +33,8 @@ if len(message) - len(key) > 0:
 
     print("Modified key:", modified_key)
             
-cipher = encrypt(message.upper(), modified_key.upper())
+cipher = encrypt(message, modified_key)
 print("Ciphered text:", cipher)
 
-decipher = decrypt(cipher.upper(), modified_key.upper())    
+decipher = decrypt(cipher, modified_key)    
 print("Deciphered text:", decipher)
