@@ -13,11 +13,11 @@ print("Public key 'g' value:", g)
 print("Private key 'a' value:", a)
 print("Private key 'b' value:", b)
 
-value_a = pow(g, a) % p # or use pow(g, a, p) - mod is taken of 3rd param
-value_b = pow(g, b) % p
+x_a = pow(g, a) % p # or use pow(g, a, p) - mod is taken of 3rd param
+x_b = pow(g, b) % p
 
-key_a = pow(value_b, a) % p
-key_b = pow(value_a, b) % p
+key_a = pow(x_b, a) % p
+key_b = pow(x_a, b) % p
 
 if key_a == key_b:
     print("Secret key for both users:", key_a)
