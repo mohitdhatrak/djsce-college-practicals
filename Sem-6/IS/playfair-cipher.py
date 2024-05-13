@@ -91,7 +91,7 @@ for letter in modified_key:
   if (letter not in unique_char_in_key):
     unique_char_in_key.append(letter)
 
-char_not_in_key = list(filter(lambda x: x.upper() not in unique_char_in_key, char))
+char_not_in_key = list(filter(lambda x: x not in unique_char_in_key, char))
 mask_char = unique_char_in_key + char_not_in_key
 
 # make a random 5x5 matrix
@@ -120,7 +120,7 @@ text = text.upper().replace(" ", "") # remove space char
 modified_text = text.replace("J", "I")
 print("\nPlain text:", modified_text)
 
-char_not_in_text = list(filter(lambda x: x.upper() not in modified_text, char))
+char_not_in_text = list(filter(lambda x: x not in modified_text, char))
 print("List of characters not used in plain text:", char_not_in_text)
 
 # to avoid same letter pairs - we add bogus char
@@ -131,7 +131,6 @@ for i in range(len(text) - 1):
         random_char = random.choice(char_not_in_text)
         modified_text = modified_text[: position + 1] + random_char + modified_text[position + 1 :]
         char_not_in_text.remove(random_char)
-    i += 1
 
 # if string has odd length, add one char at end
 if len(modified_text) % 2 != 0:
