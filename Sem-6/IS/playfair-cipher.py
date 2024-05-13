@@ -1,5 +1,79 @@
 import random
 
+
+# returns position of letter in 5x5 mask matrix as tuple
+def get_element_position(arr, target):
+    for i, row in enumerate(arr):
+        for j, value in enumerate(row):
+            if value == target:
+                return (i, j)
+
+def encrypt(mask, digraph_arr):
+    cipher = ""
+
+    for pair in digraph_arr:
+        # char 1 and char 2 are like coordinates (x, y)
+        char1 = get_element_position(mask, pair[0])
+        char2 = get_element_position(mask, pair[1])
+
+        # same row case (x coordinate is same)
+        if char1[0] == char2[0]:
+            common_row = char1[0]
+            column1 = (char1[1] + 1) % 5
+            column2 = (char2[1] + 1) % 5
+            cipher += mask[common_row][column1] + mask[common_row][column2]
+
+        # same column case (y coordinate is same)
+        elif char1[1] == char2[1]:
+            common_column = char1[1]
+            row1 = (char1[0] + 1) % 5
+            row2 = (char2[0] + 1) % 5
+            cipher += mask[row1][common_column] + mask[row2][common_column]
+
+        # both row and column different case
+        # row remains same, column becomes column of other char
+        else:
+            row1 = char1[0]
+            column1 = char2[1]
+            row2 = char2[0]
+            column2 = char1[1]
+            cipher += mask[row1][column1] + mask[row2][column2]
+
+    return cipher
+    
+def decrypt(mask, digraph_arr):
+    decipher = ""
+
+    for pair in digraph_arr:
+        # char 1 and char 2 are like coordinates (x, y)
+        char1 = get_element_position(mask, pair[0])
+        char2 = get_element_position(mask, pair[1])
+
+        # same row case (x coordinate is same)
+        if char1[0] == char2[0]:
+            common_row = char1[0]
+            column1 = (char1[1] - 1) % 5
+            column2 = (char2[1] - 1) % 5
+            decipher += mask[common_row][column1] + mask[common_row][column2]
+
+        # same column case (y coordinate is same)
+        elif char1[1] == char2[1]:
+            common_column = char1[1]
+            row1 = (char1[0] - 1) % 5
+            row2 = (char2[0] - 1) % 5
+            decipher += mask[row1][common_column] + mask[row2][common_column]
+
+        # both row and column different case
+        # row remains same, column becomes column of other char
+        else:
+            row1 = char1[0]
+            column1 = char2[1]
+            row2 = char2[0]
+            column2 = char1[1]
+            decipher += mask[row1][column1] + mask[row2][column2]
+
+    return decipher
+
 # J not included
 char = "ABCDEFGHIKLMNOPQRSTUVWXYZ"
 
@@ -68,41 +142,10 @@ print("\nText after adding bogus letters:", modified_text)
 digraph_arr = [modified_text[i : i + 2] for i in range(0, len(modified_text), 2)] # 3rd param in range is 'step', so i increments by 2
 print("Digraphs of text:", digraph_arr)
 
-# returns position of letter in 5x5 mask matrix as tuple
-def get_element_position(arr, target):
-    for i, row in enumerate(arr):
-        for j, value in enumerate(row):
-            if value == target:
-                return (i, j)
-
-cipher = ""
-
-for pair in digraph_arr:
-    # char 1 and char 2 are like coordinates (x, y)
-    char1 = get_element_position(mask, pair[0])
-    char2 = get_element_position(mask, pair[1])
-
-    # same row case (x coordinate is same)
-    if char1[0] == char2[0]:
-        common_row = char1[0]
-        column1 = (char1[1] + 1) % 5
-        column2 = (char2[1] + 1) % 5
-        cipher += mask[common_row][column1] + mask[common_row][column2]
-
-    # same column case (y coordinate is same)
-    elif char1[1] == char2[1]:
-        common_column = char1[1]
-        row1 = (char1[0] + 1) % 5
-        row2 = (char2[0] + 1) % 5
-        cipher += mask[row1][common_column] + mask[row2][common_column]
-
-    # both row and column different case
-    # row remains same, column becomes column of other char
-    else:
-        row1 = char1[0]
-        column1 = char2[1]
-        row2 = char2[0]
-        column2 = char1[1]
-        cipher += mask[row1][column1] + mask[row2][column2]
-
+cipher = encrypt(mask, digraph_arr)
 print("\nCiphered text:", cipher)
+
+cipher_digraph_arr = [cipher[i : i + 2] for i in range(0, len(cipher), 2)] # 3rd param in range is 'step', so i increments by 2
+
+decipher = decrypt(mask, cipher_digraph_arr)
+print("\nDeciphered text:", decipher)
