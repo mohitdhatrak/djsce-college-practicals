@@ -27,7 +27,7 @@ def sign_message(message, private_key):
     md1 = int(hashlib.md5(message.encode()).hexdigest(), 16) % n
     print("\nMD1 Hash:", md1)
     signature = pow(md1, d) % n # encrypt with private key
-    return signature, md1
+    return signature
 
 def verify_sign(message, signature, public_key):
     e, n = public_key
@@ -35,7 +35,11 @@ def verify_sign(message, signature, public_key):
     print("MD2 Hash:", md2)
     recovered_hash = pow(signature, e) % n # decrypt with public key
     print("Recovered Hash:", recovered_hash)
-    return recovered_hash, md2
+    
+    if recovered_hash == md2:
+        print("Signature is valid, message is valid and from trusted source")
+    else:
+        print("Signature is not valid, message might be altered")
 
 # perform RSA algorithm to get e and d OR directly assume e and d values
 p = 1013
@@ -57,20 +61,12 @@ original_message = "Send 500 rupees"
 altered_message = "Send 50000 rupees 😝"
 print("\nMessage 1:", original_message)
 print("Message 2:", altered_message)
-signature, md1 = sign_message(original_message, private_key)
+signature = sign_message(original_message, private_key)
 print("Signature:", signature)
 
 # verify the signature for both messages
 print("\nVerifying authenticity of message:", original_message)
-recovered_hash, md2 = verify_sign(original_message, signature, public_key)
-if recovered_hash == md2:
-    print("Signature is valid, message is valid and from trusted source")
-else:
-    print("Signature is not valid, message might be altered")
+verify_sign(original_message, signature, public_key)
 
 print("\nVerifying authenticity of message:", altered_message)
-recovered_hash, md2 = verify_sign(altered_message, signature, public_key)
-if recovered_hash == md2:
-    print("Signature is valid, message is valid and from trusted source")
-else:
-    print("Signature is not valid, message might be altered")
+verify_sign(altered_message, signature, public_key)
