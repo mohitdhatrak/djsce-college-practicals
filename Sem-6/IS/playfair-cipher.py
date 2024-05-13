@@ -107,7 +107,10 @@ for i in range(5):
 
 print("\nMask:", end="")
 for row in mask:
-    print("\t", row)
+    print("\t", end="")
+    for letter in row:
+        print(letter, end=" ")
+    print()
 
 # text = input("Enter plain text: ")
 text = "hello world"
