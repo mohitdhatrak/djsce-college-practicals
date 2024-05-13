@@ -1,20 +1,19 @@
 import random
 
 
-def encrypt(matrix, key_order):
+def encrypt(matrix, key_order, key_size, rows):
     cipher = ""
 
     for i in range(key_size):
         column = key_order.index(i + 1) # get column number as per key order
 
-        for row in range(len(matrix)):
+        for row in range(rows):
             cipher += matrix[row][column]
 
     return cipher
 
-def decrypt(text, key_order):
-    rows = int(message_size / key_size)
-    deciphered_matrix = [[0] * key_size for _ in range(rows)] # initialize matrix with empty arrays
+def decrypt(text, key_order, key_size, rows):
+    deciphered_matrix = [[''] * key_size for _ in range(rows)] # initialize matrix with empty arrays of key size
 
     for i in range(key_size):
         column = key_order.index(i + 1) # get column number as per key order
@@ -35,9 +34,9 @@ def decrypt(text, key_order):
 # key1 = input("Enter key 1: ")
 key1 = "Potato"
 print("Key 1:", key1)
-key1_copy = key1
-key_size = len(key1)
-sorted_key1 = sorted(key1.lower())
+key_size = len(key1) 
+sorted_key1 = sorted(key1.lower()) # remember to do key.lower() else it sorts as per ascii values of upper and lower case
+key1_copy = key1.lower() # here also do .lower(), as we use this copy for comparison below
 print("Sorted key 1:", sorted_key1)
 
 # initialize array with zeroes
@@ -45,9 +44,9 @@ key1_order = [0] * key_size
 
 for i in range(key_size):
     for j in range(key_size):
-        if sorted_key1[i] == key1_copy[j].lower():
+        if sorted_key1[i] == key1_copy[j]:
             key1_order[j] = i + 1
-            # to replace letter with '-' once it is matched (to avoid matching)
+            # to replace letter with '-' once it is matched (to handle case where key has duplicate letters)
             key1_copy = key1_copy[0 : j] + "-" + key1_copy[j + 1 :]
             break
 
@@ -57,8 +56,8 @@ print("Key 1 order:", key1_order)
 # key2 = input("Enter key 2 (same size as key 1): ")
 key2 = "Sparta"
 print("\nKey 2:", key2)
-key2_copy = key2
-sorted_key2 = sorted(key2.lower())
+sorted_key2 = sorted(key2.lower()) # remember to do key.lower() else it sorts as per ascii values of upper and lower case
+key2_copy = key2.lower() # here also do .lower(), as we use this copy for comparison below
 print("Sorted key 2:", sorted_key2)
 
 # initialize array with zeroes
@@ -66,9 +65,9 @@ key2_order = [0] * key_size
 
 for i in range(key_size):
     for j in range(key_size):
-        if sorted_key2[i] == key2_copy[j].lower():
+        if sorted_key2[i] == key2_copy[j]:
             key2_order[j] = i + 1
-            # to replace letter with '-' once it is matched (to avoid matching)
+            # to replace letter with '-' once it is matched (to handle case where key has duplicate letters)
             key2_copy = key2_copy[0 : j] + "-" + key2_copy[j + 1 :]
             break
 
@@ -87,8 +86,10 @@ for i in range(padding_size):
 message_size = len(message) # update message size
 print("\nPadded text:", message)
 
+rows = int(message_size / key_size)
+
 matrix1 = []
-for i in range(int(message_size / key_size)):
+for i in range(rows):
     arr = []
     start = key_size * i
 
@@ -103,11 +104,11 @@ for row in matrix1:
         print(letter, end=" ")
     print()
 
-cipher1 = encrypt(matrix1, key1_order)
+cipher1 = encrypt(matrix1, key1_order, key_size, rows)
 print("\nCiphered text (step 1):", cipher1)
 
 matrix2 = []
-for i in range(int(message_size / key_size)):
+for i in range(rows):
     arr = []
     start = key_size * i
 
@@ -122,15 +123,15 @@ for row in matrix2:
         print(letter, end=" ")
     print()
 
-cipher2 = encrypt(matrix2, key2_order)
+cipher2 = encrypt(matrix2, key2_order, key_size, rows)
 print("\nCiphered text (step 2):", cipher2)
 
 # deciphering little complex - 
-deciphered_arr1 = decrypt(cipher2, key2_order)
+deciphered_arr1 = decrypt(cipher2, key2_order, key_size, rows)
 decipher1 = "".join(deciphered_arr1)
 print("\nDeciphered text (step 1):", decipher1)
 
-deciphered_arr2 = decrypt(decipher1, key1_order)
+deciphered_arr2 = decrypt(decipher1, key1_order, key_size, rows)
 
 # remove the padding symbols
 for i in range(len(deciphered_arr2)):
